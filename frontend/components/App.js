@@ -9,7 +9,8 @@ export default class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      inputValue: ''
+      inputValue: '',
+      todos: []
     };
   }
 
@@ -25,7 +26,7 @@ export default class App extends React.Component {
     return (
       <div className='app-wrapper'>
         <h2>App Component</h2>
-        <TodoList />
+        <TodoList todos={this.state.todos} />
         <Form />
       </div>
     )
