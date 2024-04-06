@@ -8,7 +8,7 @@ export default class TodoList extends React.Component {
       <div className='todoList'>
         <h2>Todos:</h2>
         {
-          todos.map((todo, idx) =>  
+          todos.map(todo =>  
               <Todo
                 key={todo.id}
                 todo={todo}
