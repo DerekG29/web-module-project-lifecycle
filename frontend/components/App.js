@@ -29,6 +29,9 @@ export default class App extends React.Component {
         return todo;
       })
     })
+    axios.patch(`${URL}/${id}`)
+      .then(res => console.log(res))
+      .catch(err => console.error(err));
   }
 
   render() {
