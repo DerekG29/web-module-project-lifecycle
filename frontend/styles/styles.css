@@ -20,11 +20,6 @@ body, input, button {
   color: #484848;
 }
 
-body {
-  background-color: hsl(0, 0%, 10%);
-  color: hsl(0, 0%, 90%);
-}
-
 #root, #wrapper {
   display: flex;
   flex-direction: column;
@@ -82,9 +77,16 @@ ul, form {
 }
 
 .todo {
-  padding: 0.15rem;
+  padding: 0.25rem;
 }
 
 .todo:hover {
   cursor: pointer;
+}
+
+.app-wrapper {
+  padding: 1.5rem;
+  border: 1px solid rgb(200, 200, 200);
+  border-radius: 3px;
+  box-shadow: 5px 5px 8px hsl(0, 0%, 75%);
 }

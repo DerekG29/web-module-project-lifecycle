@@ -2,7 +2,6 @@ import React from 'react';
 import axios from 'axios';
 import TodoList from './TodoList';
 import Form from './Form';
-const { nanoid } = require('nanoid');
 
 const URL = 'http://localhost:9000/api/todos'
 
@@ -30,13 +29,17 @@ export default class App extends React.Component {
     this.setState({ ...this.state,
       todos: this.state.todos.map(todo => {
         if (todo.id === id)
-          return { ...todo, completed: !todo.completed};
-        return todo;
-      })
-    });
-    axios.patch(`${URL}/${id}`)
-      .then(res => console.log(res.data.message))
-      .catch(err => console.error(err));
+        return { ...todo, completed: !todo.completed};
+      return todo;
+    })
+  });
+  axios.patch(`${URL}/${id}`)
+    .then(res => console.log(res.data.message))
+    .catch(err => console.error(err));
+  }
+
+  toggleShowCompleted = () => {
+    this.setState({ ...this.state, showCompleted: !this.state.showCompleted});
   }
 
   handleInput = (e) => {
@@ -46,13 +49,13 @@ export default class App extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const newTodo = { id: nanoid(5), name: this.state.inputValue, completed: false }
-    this.setState({ ...this.state,
-        todos: this.state.todos.concat(newTodo),
-        inputValue: ''
-    });
+    const newTodo = { name: this.state.inputValue, completed: false }
     axios.post(URL, newTodo)
-      .then(res => console.log(res))
+      .then(res => {
+        console.log(res.statusText);
+        this.fetchState();
+        this.setState({ ...this.state, inputValue: ''})
+      })
       .catch(err => console.error(err));
   }
 
@@ -62,12 +65,14 @@ export default class App extends React.Component {
         <TodoList
           todos={this.state.todos}
           toggleCompleted={this.toggleCompleted}
-          showCompleted={this.showCompleted}
+          showCompleted={this.state.showCompleted}
         />
         <Form
           handleInput={this.handleInput}
           handleSubmit={this.handleSubmit}
           inputValue={this.state.inputValue}
+          showCompleted={this.state.showCompleted}
+          toggleShowCompleted={this.toggleShowCompleted}
         />
       </div>
     )

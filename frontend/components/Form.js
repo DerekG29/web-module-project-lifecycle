@@ -2,7 +2,13 @@ import React from 'react'
 
 export default class Form extends React.Component {
   render() {
-    const { handleInput, handleSubmit, inputValue } = this.props;
+    const {
+      handleInput,
+      handleSubmit,
+      inputValue,
+      showCompleted,
+      toggleShowCompleted
+    } = this.props;
     return (
       <div className='form'>
         <form onSubmit={(e) => handleSubmit(e)}>
@@ -11,10 +17,13 @@ export default class Form extends React.Component {
             placeholder='Type Todo'
             value={inputValue}
             onChange={(e) => handleInput(e)}
+            required
           />
           <input type='submit' />
         </form>
-        <button>Hide Completed</button>
+        <button onClick={toggleShowCompleted}>
+          {showCompleted ? 'Hide Completed' : 'Show Completed'}
+        </button>
       </div>
     )
   }
