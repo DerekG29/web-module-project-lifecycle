@@ -21,12 +21,22 @@ export default class App extends React.Component {
       .catch(err => console.error(err));
   }
 
+  toggleCompleted = (id) => {
+    this.setState({ ...this.state,
+      todos: this.state.todos.map(todo => {
+        if (todo.id === id)
+          return { ...todo, completed: !todo.completed};
+        return todo;
+      })
+    })
+  }
+
   render() {
     console.log('App - Render Invoked');
     return (
       <div className='app-wrapper'>
         <h2>App Component</h2>
-        <TodoList todos={this.state.todos} />
+        <TodoList todos={this.state.todos} toggleCompleted={this.toggleCompleted} />
         <Form />
       </div>
     )
