@@ -8,15 +8,16 @@ const URL = 'http://localhost:9000/api/todos'
 export default class App extends React.Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      inputValue: ''
+    };
   }
 
   componentDidMount() {
     console.log('App - CDM Invoked');
     axios.get(URL)
-      .then(res => this.setState(res.data.data))
+      .then(res => this.setState({ ...this.state, todos: res.data.data}))
       .catch(err => console.error(err));
-    
   }
 
   render() {
