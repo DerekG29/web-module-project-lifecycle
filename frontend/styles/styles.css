@@ -20,6 +20,11 @@ body, input, button {
   color: #484848;
 }
 
+body {
+  background-color: hsl(0, 0%, 10%);
+  color: hsl(0, 0%, 90%);
+}
+
 #root, #wrapper {
   display: flex;
   flex-direction: column;
